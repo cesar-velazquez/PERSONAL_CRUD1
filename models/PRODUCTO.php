@@ -1,19 +1,20 @@
 <?php
-    class PRODUCTO extends  Conectar{
+    class Producto extends Conectar{
         public function get_producto(){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT * from tm_producto";
+            $sql="SELECT * FROM tm_producto";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
+
         public function get_producto_x_id($prod_id){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT * from tm_producto where prod_id= ?";
+            $sql="SELECT * FROM tm_producto WHERE prod_id = ?";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $prod_id);
+            $sql->bindValue(1,$prod_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
@@ -22,16 +23,16 @@
             $conectar= parent::conexion();
             parent::set_names();
             $sql="UPDATE tm_producto
-            set 
-            estado=0
-            fecha_eliminacion=now()
-            where prod_id=?";
+                SET
+                    est=0,
+                    fech_elim=now()
+                WHERE
+                    prod_id = ?";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $prod_id);
+            $sql->bindValue(1,$prod_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
-        }
-
+        }   
         public function insert_producto($prod_nom){
             $conectar= parent::conexion();
             parent::set_names();
